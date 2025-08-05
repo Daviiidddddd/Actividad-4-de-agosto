@@ -1,0 +1,43 @@
+# Simulador de Navegador Web - Autor: David Castellanos
+
+class Navegador:
+    def __init__(self):
+        self.pagina_actual = None
+        self.historial_atras = []  # pila para ir hacia atrás
+        self.historial_adelante = []  # pila para ir hacia adelante
+
+    def cargar_pagina(self, url):
+        if self.pagina_actual:
+            self.historial_atras.append(self.pagina_actual)
+        self.pagina_actual = url
+        self.historial_adelante.clear()
+        print(f"Has cargado: {self.pagina_actual}")
+
+    def retroceder(self):
+        if not self.historial_atras:
+            print("No hay más páginas previas.")
+            return
+        self.historial_adelante.append(self.pagina_actual)
+        self.pagina_actual = self.historial_atras.pop()
+        print(f"Retrocediste a: {self.pagina_actual}")
+
+    def avanzar(self):
+        if not self.historial_adelante:
+            print("No hay páginas siguientes disponibles.")
+            return
+        self.historial_atras.append(self.pagina_actual)
+        self.pagina_actual = self.historial_adelante.pop()
+        print(f"Avanzaste a: {self.pagina_actual}")
+        
+# Instancia del navegador de David Castellanos
+mi_navegador = Navegador()
+
+# Navegación simulada
+mi_navegador.cargar_pagina("pagina1")
+mi_navegador.cargar_pagina("pagina2")
+mi_navegador.cargar_pagina("pagina3")
+mi_navegador.retroceder()
+mi_navegador.retroceder()
+mi_navegador.avanzar()
+mi_navegador.cargar_pagina("pagina4")
+mi_navegador.retroceder()
